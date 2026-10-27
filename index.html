@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10060b">
+  <title>LILITH.exe — Personal Intelligence Center</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="LILITH.exe início"><span class="brand-mark">✦</span><span>LILITH<span class="brand-dot">.exe</span><small>PERSONAL INTELLIGENCE CENTER</small></span></a>
+      <div class="topbar-meta"><span class="status-dot"></span><span id="system-status">SYSTEM ONLINE</span><span class="top-divider"></span><span id="clock">--:--:--</span><span id="date">--/--/----</span></div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <p class="nav-label">WORKSPACE</p>
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-item" data-view="explorer"><span>⌕</span> Data Explorer</button>
+        <button class="nav-item" data-view="weather"><span>☾</span> Weather Data</button>
+        <button class="nav-item" data-view="economy"><span>▥</span> World Indicators</button>
+        <button class="nav-item" data-view="terminal"><span>›_</span> Terminal</button>
+        <button class="nav-item" data-view="notes"><span>▤</span> Notes</button>
+        <button class="nav-item" data-view="passwords"><span>⚿</span> Password Lab</button>
+        <button class="nav-item" data-view="security"><span>◇</span> Security Check</button>
+        <div class="sidebar-bottom"><div class="mini-orb">L</div><div><strong>LOCAL MODE</strong><small>Public data only</small></div></div>
+      </aside>
+
+      <main class="main-content">
+        <section class="view active" id="dashboard">
+          <div class="page-heading"><p class="eyebrow">WELCOME BACK, OPERATOR</p><h1>Control <span>Center</span></h1><p>Uma central pessoal para explorar informações públicas e organizar seus dados.</p></div>
+          <div class="hero-panel">
+            <div><p class="eyebrow">LILITH.exe / VERSION 2.0</p><h2>Explore the public web.</h2><p>Pesquise conhecimento, consulte dados climáticos e compare indicadores públicos em um só lugar.</p><button class="primary-button" data-open-view="explorer">Open Data Explorer <span>↗</span></button></div>
+            <div class="hero-symbol" aria-hidden="true"><div class="orb-ring ring-one"></div><div class="orb-ring ring-two"></div><div class="hero-glyph">L</div><span class="orb-label">PUBLIC DATA / ONLINE</span></div>
+          </div>
+          <div class="stat-grid">
+            <article class="stat-card"><span class="stat-icon">⌕</span><p>KNOWLEDGE SEARCH</p><h3>Wikipedia</h3><small>Artigos públicos</small><button class="text-button" data-open-view="explorer">Pesquisar →</button></article>
+            <article class="stat-card"><span class="stat-icon">☾</span><p>WEATHER DATA</p><h3>Open-Meteo</h3><small>Condições e previsão</small><button class="text-button" data-open-view="weather">Consultar →</button></article>
+            <article class="stat-card"><span class="stat-icon">▥</span><p>WORLD INDICATORS</p><h3>World Bank</h3><small>Estatísticas globais</small><button class="text-button" data-open-view="economy">Explorar →</button></article>
+            <article class="stat-card"><span class="stat-icon">▤</span><p>PERSONAL NOTES</p><h3 id="dashboard-notes-count">0 notes</h3><small>Salvas neste navegador</small><button class="text-button" data-open-view="notes">Abrir notas →</button></article>
+          </div>
+          <div class="panel-grid">
+            <article class="panel"><div class="panel-heading"><div><p class="eyebrow">QUICK ACCESS</p><h2>Shortcuts</h2></div><span class="panel-symbol">✦</span></div><div class="shortcut-list"><button data-open-view="terminal"><span>›_</span><div><strong>Local Terminal</strong><small>Comandos da interface</small></div><b>→</b></button><button data-open-view="passwords"><span>⚿</span><div><strong>Password Lab</strong><small>Gerar senha aleatória</small></div><b>→</b></button><button data-open-view="security"><span>◇</span><div><strong>Security Check</strong><small>Análise indicativa local</small></div><b>→</b></button></div></article>
+            <article class="panel"><div class="panel-heading"><div><p class="eyebrow">SYSTEM LOG</p><h2>Recent activity</h2></div><span class="live-pill"><i></i> LIVE</span></div><div id="activity-log" class="activity-log"><p><time>INIT</time><span>LILITH.exe initialized.</span></p><p><time>SAFE</time><span>Only public sources are configured.</span></p><p><time>LOCAL</time><span>Notes are stored in this browser.</span></p></div></article>
+          </div>
+          <p class="fine-print">LILITH.exe não coleta dados privados de terceiros. Consultas externas são feitas apenas às fontes públicas indicadas em cada módulo.</p>
+        </section>
+
+        <section class="view" id="explorer" hidden>
+          <div class="page-heading"><p class="eyebrow">PUBLIC INFORMATION</p><h1>Data <span>Explorer</span></h1><p>Pesquise artigos públicos usando a API da Wikipédia.</p></div>
+          <article class="panel">
+            <form id="explorer-form" class="search-form"><label for="explorer-query">Search knowledge</label><div class="search-row"><input id="explorer-query" type="search" placeholder="Ex.: astronomia, história, tecnologia..." required><button class="primary-button" type="submit" id="explorer-search">Search ↗</button></div></form>
+            <p id="explorer-status" class="status-message" role="status">Ready to search.</p><div id="explorer-results" class="results-grid"></div>
+          </article>
+          <p class="fine-print">Fonte: Wikipédia em português. Os resultados são links para os artigos originais. O serviço requer conexão com a internet.</p>
+        </section>
+
+        <section class="view" id="weather" hidden>
+          <div class="page-heading"><p class="eyebrow">OPEN-METEO API</p><h1>Weather <span>Data</span></h1><p>Consulte condições atuais e previsão diária para uma cidade.</p></div>
+          <article class="panel">
+            <form id="weather-form" class="search-form"><label for="weather-city">City or place</label><div class="search-row"><input id="weather-city" type="search" placeholder="Ex.: Curitiba, São Paulo, Lisboa..." required><button class="primary-button" type="submit" id="weather-search">Get weather ↗</button></div></form>
+            <p id="weather-status" class="status-message" role="status">Digite uma cidade para começar.</p><div id="weather-results"></div>
+          </article>
+          <p class="fine-print">Fontes: Open-Meteo Geocoding e Forecast APIs. A previsão é informativa e pode variar.</p>
+        </section>
+
+        <section class="view" id="economy" hidden>
+          <div class="page-heading"><p class="eyebrow">WORLD BANK OPEN DATA</p><h1>World <span>Indicators</span></h1><p>Consulte séries estatísticas públicas por país e indicador.</p></div>
+          <article class="panel">
+            <form id="economy-form" class="search-form">
+              <label for="economy-country">Country</label><select id="economy-country"><option value="BRA">Brazil</option><option value="USA">United States</option><option value="PRT">Portugal</option><option value="GBR">United Kingdom</option><option value="CAN">Canada</option><option value="FRA">France</option><option value="DEU">Germany</option><option value="JPN">Japan</option><option value="ARG">Argentina</option><option value="CHL">Chile</option><option value="IND">India</option><option value="ZAF">South Africa</option></select>
+              <label for="economy-indicator">Indicator</label><select id="economy-indicator"><option value="SP.POP.TOTL">Population, total</option><option value="NY.GDP.MKTP.CD">GDP (current US$)</option><option value="NY.GDP.PCAP.CD">GDP per capita (current US$)</option><option value="SP.DYN.LE00.IN">Life expectancy at birth</option><option value="SL.UEM.TOTL.ZS">Unemployment (% of labor force)</option><option value="EN.ATM.CO2E.PC">CO₂ emissions per capita</option><option value="IT.NET.USER.ZS">Individuals using the Internet (%)</option></select>
+              <button class="primary-button" type="submit" id="economy-search">Fetch indicators ↗</button>
+            </form>
+            <p id="economy-status" class="status-message" role="status">Choose a country and indicator.</p><div id="economy-results"></div>
+          </article>
+          <p class="fine-print">Fonte: World Bank Indicators API. Os indicadores podem ter anos disponíveis diferentes e nem sempre possuem dados recentes.</p>
+        </section>
+
+        <section class="view" id="terminal" hidden>
+          <div class="page-heading"><p class="eyebrow">LOCAL INTERFACE</p><h1>System <span>Terminal</span></h1><p>Terminal simulado: executa apenas comandos locais desta aplicação.</p></div>
+          <article class="terminal-window"><div class="terminal-top"><span><i></i><i></i><i></i></span><span>operator@lilith:~</span><span>LOCAL</span></div><div id="terminal-output" class="terminal-output" aria-live="polite"><p> L I L I T H . e x e — local terminal</p><p>Type <strong>help</strong> to see available commands.</p></div><form id="terminal-form" class="terminal-form"><label for="terminal-input">operator@lilith:~$</label><input id="terminal-input" autocomplete="off" spellcheck="false" placeholder="type a command..." aria-label="Terminal command"></form></article>
+        </section>
+
+        <section class="view" id="notes" hidden>
+          <div class="page-heading"><p class="eyebrow">PRIVATE WORKSPACE</p><h1>Personal <span>Notes</span></h1><p>Crie notas guardadas localmente neste navegador.</p></div>
+          <div class="notes-layout"><article class="panel"><div class="panel-heading"><div><p class="eyebrow">NEW ENTRY</p><h2>Create note</h2></div></div><form id="notes-form" class="stack-form"><label for="note-title">Title</label><input id="note-title" maxlength="100" placeholder="Título da nota" required><label for="note-content">Content</label><textarea id="note-content" rows="6" maxlength="10000" placeholder="Escreva aqui..." required></textarea><button class="primary-button" type="submit">Save note +</button></form></article><article class="panel"><div class="panel-heading"><div><p class="eyebrow">YOUR ARCHIVE</p><h2>Saved notes</h2></div><span id="notes-count" class="count-pill">0 notes</span></div><div id="notes-list" class="notes-list"></div></article></div>
+          <p class="fine-print">As notas ficam no armazenamento local deste navegador. Evite guardar senhas ou informações sensíveis.</p>
+        </section>
+
+        <section class="view" id="passwords" hidden>
+          <div class="page-heading"><p class="eyebrow">LOCAL SECURITY TOOL</p><h1>Password <span>Lab</span></h1><p>Gere uma senha aleatória diretamente no navegador.</p></div>
+          <article class="panel tool-panel"><div class="range-heading"><label for="password-length">Password length</label><strong id="password-length-value">20</strong></div><input type="range" id="password-length" min="8" max="64" value="20"><div class="checkbox-grid"><label><input type="checkbox" id="include-uppercase" checked> Uppercase (A-Z)</label><label><input type="checkbox" id="include-lowercase" checked> Lowercase (a-z)</label><label><input type="checkbox" id="include-numbers" checked> Numbers (0-9)</label><label><input type="checkbox" id="include-symbols" checked> Symbols (!@#...)</label></div><button class="primary-button" type="button" id="generate-password">Generate password ↗</button><label for="generated-password" class="field-label">Generated password</label><div class="search-row"><input id="generated-password" type="text" readonly placeholder="Your password will appear here"><button class="secondary-button" type="button" id="copy-password">Copy</button></div><p id="password-feedback" class="status-message" role="status"></p></article>
+        </section>
+
+        <section class="view" id="security" hidden>
+          <div class="page-heading"><p class="eyebrow">LOCAL SECURITY TOOL</p><h1>Security <span>Check</span></h1><p>Estimativa simples de características de uma senha; não consulta serviços externos.</p></div>
+          <article class="panel tool-panel"><label for="security-password">Password to analyze</label><input id="security-password" type="password" autocomplete="off" placeholder="Digite uma senha fictícia para testar"><label class="inline-check"><input type="checkbox" id="show-security-password"> Show password</label><button class="primary-button" type="button" id="analyze-password">Analyze locally ↗</button><div id="security-result" class="security-result" aria-live="polite"></div><p class="fine-print">Não use uma senha real ou importante em ferramentas que você não controla. A análise é indicativa, não verifica vazamentos nem garante segurança.</p></article>
+        </section>
+
+        
+<section id="rastro-digital" class="secao">
+  <h2>⌕ RASTRO DIGITAL</h2>
+  <p>Pesquisa de menções públicas na internet.</p>
+
+  <form id="form-rastro">
+    <label for="telefone">Número de telefone</label>
+
+    <input
+      type="tel"
+      id="telefone"
+      placeholder="+55 41 99999-9999"
+      autocomplete="off"
+      required
+    />
+
+    <button type="submit">Pesquisar número</button>
+  </form>
+
+  <div id="resultado-rastro" aria-live="polite">
+    Aguardando consulta...
+  </div>
+</section>
+
+        <footer class="app-footer"><span>© LILITH.exe</span><span>BUILT FOR PERSONAL USE <b>✦</b></span></footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
